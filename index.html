@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>田中佑典 | Yusuke Tanaka</title>
+<meta name="description" content="田中佑典（Yusuke Tanaka）の個人サイト。環境社会学・地域社会研究。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500&family=Noto+Serif+JP:wght@300;400&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav" aria-label="メイン">
+  <a class="nav-home" href="#top">田中佑典</a>
+  <div class="nav-links">
+    <a href="#profile">Profile</a>
+    <a href="#publications">Publications</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <h1 class="hero-name-v" id="hero-name-ja">田中佑典</h1>
+    <div class="hero-side">
+      <p class="hero-name-en" id="hero-name-en">Yusuke Tanaka</p>
+      <p class="hero-tagline" id="hero-tagline"></p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="section" id="profile">
+    <h2 class="section-title"><span class="en">Profile</span><span class="ja">略歴</span></h2>
+    <div class="profile-affil" id="profile-affil"></div>
+    <div class="profile-bio" id="profile-bio"></div>
+  </section>
+
+  <section class="section" id="publications">
+    <h2 class="section-title"><span class="en">Publications</span><span class="ja">研究・論文</span></h2>
+    <p class="section-lede" id="pub-lede"></p>
+    <ol class="pub-list" id="pub-list"></ol>
+  </section>
+
+  <section class="section" id="news">
+    <h2 class="section-title"><span class="en">News</span><span class="ja">近況・随想</span></h2>
+    <p class="section-lede">noteに綴っている文章の新しいものから。</p>
+    <div class="news-grid" id="news-grid"><p class="muted">読み込んでいます……</p></div>
+    <p class="news-more"><a id="note-link" href="#" target="_blank" rel="noopener">すべての記事を note で読む →</a></p>
+  </section>
+
+  <section class="section" id="contact">
+    <h2 class="section-title"><span class="en">Contact</span><span class="ja">連絡先</span></h2>
+    <div id="contact-body"></div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p id="footer-text">© Yusuke Tanaka</p>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+/* 管理者招待メールのリンクから来た場合、ログイン後に管理画面へ移動します */
+if (window.netlifyIdentity) {
+  netlifyIdentity.on("init", u => { if (!u) netlifyIdentity.on("login", () => { document.location.href = "/admin/"; }); });
+}
+</script>
+</body>
+</html>

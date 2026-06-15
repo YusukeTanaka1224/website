@@ -1,0 +1,61 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "content"
+    label: "サイトの内容"
+    files:
+
+      - name: "profile"
+        label: "プロフィール"
+        file: "data/profile.json"
+        fields:
+          - { name: "name_ja", label: "氏名（日本語）", widget: "string" }
+          - { name: "name_en", label: "氏名（英語）", widget: "string" }
+          - { name: "tagline", label: "肩書き・ひとこと（トップに表示）", widget: "string", required: false }
+          - { name: "affiliations", label: "所属（1行ずつ追加）", widget: "list", field: { name: "item", label: "所属", widget: "string" } }
+          - { name: "bio", label: "経歴・自己紹介（空行で段落を分けます）", widget: "text" }
+
+      - name: "publications"
+        label: "論文リスト"
+        file: "data/publications.json"
+        fields:
+          - { name: "lede", label: "冒頭の紹介文", widget: "string", required: false }
+          - name: "items"
+            label: "論文（「＋」で追加できます）"
+            widget: "list"
+            fields:
+              - { name: "title", label: "タイトル", widget: "string" }
+              - { name: "venue", label: "掲載誌・媒体", widget: "string", required: false }
+              - { name: "year", label: "年（例：2026年刊行予定）", widget: "string", required: false }
+              - { name: "pdf", label: "PDFファイル（ここにアップロード）", widget: "file", required: false }
+              - { name: "link", label: "外部リンク（あれば）", widget: "string", required: false }
+
+      - name: "settings"
+        label: "サイト設定（note・連絡フォーム）"
+        file: "data/settings.json"
+        fields:
+          - { name: "note_url", label: "noteのURL", widget: "string" }
+          - { name: "news_count", label: "noteの記事を表示する件数", widget: "number", default: 6 }
+          - name: "news_manual"
+            label: "記事の手動リスト（noteの自動取得が止まった時だけ使われます。普段は空でOK）"
+            widget: "list"
+            required: false
+            fields:
+              - { name: "title", label: "記事タイトル", widget: "string" }
+              - { name: "url", label: "記事URL", widget: "string" }
+              - { name: "image", label: "画像", widget: "image", required: false }
+              - { name: "date", label: "日付（例：2026-06-01）", widget: "string", required: false }
+          - name: "contact_mode"
+            label: "連絡フォームの見せ方"
+            widget: "select"
+            options:
+              - { label: "ボタン（押すとGoogleフォームが開く）", value: "button" }
+              - { label: "埋め込み（ページ内にフォームを表示）", value: "embed" }
+          - { name: "gform_url", label: "GoogleフォームのURL（未設定なら空のまま）", widget: "string", required: false }
+          - { name: "contact_text", label: "連絡先ページの説明文", widget: "string", required: false }
+          - { name: "footer_text", label: "フッターの表記", widget: "string", required: false }
