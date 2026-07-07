@@ -17,11 +17,12 @@ load("data/profile.json").then(p => {
   /* 外部リンク（researchmap・X など）を小さなアイコン付きで表示 */
   const icons = {
     "researchmap": `<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M7 15c1.5-4 3-6 5-6s3.5 2 5 6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
-    "X": `<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 4l16 16M20 4L4 20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>`
+    "X": `<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zM17.083 19.77h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg>`
   };
-  $("profile-links").innerHTML = (p.links || []).map(l =>
-    `<a href="${esc(l.url)}" target="_blank" rel="noopener">${icons[l.label] || ""}<span>${esc(l.label)}</span></a>`
-  ).join("");
+  $("profile-links").innerHTML = (p.links || []).map(l => {
+    const logoOnly = l.label === "X";
+    return `<a href="${esc(l.url)}" target="_blank" rel="noopener" aria-label="${esc(l.label)}">${icons[l.label] || ""}${logoOnly ? "" : `<span>${esc(l.label)}</span>`}</a>`;
+  }).join("");
 }).catch(()=>{});
 
 /* ---- Story（原点） ---- */
@@ -62,13 +63,15 @@ load("data/publications.json").then(d => {
 /* ---- noteの記事取得：note本来のRSSを直接読み、media:thumbnail を取り出す ---- */
 async function fetchNote(noteUrl, count){
   const rss = noteUrl.replace(/\/$/, "") + "/rss";
-  const proxies = [
-    u => "https://api.allorigins.win/raw?url=" + encodeURIComponent(u),
-    u => "https://corsproxy.io/?url=" + encodeURIComponent(u)
+  /* 1) サイト内中継(/note-rss、_redirectsで設定) → 2) 外部中継 の順に試す */
+  const sources = [
+    "/note-rss",
+    "https://api.allorigins.win/raw?url=" + encodeURIComponent(rss),
+    "https://corsproxy.io/?url=" + encodeURIComponent(rss)
   ];
-  for (const proxy of proxies){
+  for (const src of sources){
     try{
-      const res = await fetch(proxy(rss));
+      const res = await fetch(src);
       if (!res.ok) continue;
       const xml = new DOMParser().parseFromString(await res.text(), "application/xml");
       if (xml.querySelector("parsererror")) continue;

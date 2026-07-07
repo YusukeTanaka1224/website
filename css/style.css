@@ -73,7 +73,7 @@ main{max-width:var(--measure);margin:0 auto;padding:0 1.4rem}
 /* ---- Profile ---- */
 .profile-grid{display:grid;grid-template-columns:1fr;gap:2.5rem}
 .profile-grid.has-photo{grid-template-columns:11rem 1fr;gap:3rem;align-items:start}
-.profile-photo{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(.35) brightness(.95);border:1px solid var(--line)}
+.profile-photo{width:100%;height:auto;filter:grayscale(.35) brightness(.95);border:1px solid var(--line)}
 .profile-affil{font-size:.92rem;color:var(--sub);margin-bottom:2.5rem;line-height:2.4}
 .profile-bio p{margin-bottom:1.8em;text-align:justify}
 .profile-links{margin-top:2.2rem;display:flex;gap:2.2em;flex-wrap:wrap}
