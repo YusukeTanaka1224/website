@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>田中佑典 | Yusuke Tanaka</title>
 <meta name="description" content="田中佑典（Yusuke Tanaka）の個人サイト。環境社会学・地域社会研究。">
+<meta property="og:title" content="田中佑典 | Yusuke Tanaka">
+<meta property="og:description" content="環境社会学。人口減少下の地域社会と、記憶の継承を研究しています。">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23131210'/%3E%3Ctext x='16' y='23' font-family='serif' font-size='20' fill='%23E8E4DA' text-anchor='middle'%3E田%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500&family=Noto+Serif+JP:wght@300;400&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
@@ -16,7 +21,9 @@
   <a class="nav-home" href="#top">田中佑典</a>
   <div class="nav-links">
     <a href="#profile">Profile</a>
+    <a href="#story">Story</a>
     <a href="#publications">Publications</a>
+    <a href="#talks">Talks</a>
     <a href="#news">News</a>
     <a href="#contact">Contact</a>
   </div>
@@ -35,8 +42,21 @@
 <main>
   <section class="section" id="profile">
     <h2 class="section-title"><span class="en">Profile</span><span class="ja">略歴</span></h2>
-    <div class="profile-affil" id="profile-affil"></div>
-    <div class="profile-bio" id="profile-bio"></div>
+    <div class="profile-grid">
+      <div class="profile-photo-wrap" id="profile-photo-wrap"></div>
+      <div class="profile-text">
+        <div class="profile-affil" id="profile-affil"></div>
+        <div class="profile-bio" id="profile-bio"></div>
+        <div class="profile-links" id="profile-links"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="story">
+    <h2 class="section-title"><span class="en">Story</span><span class="ja">原点</span></h2>
+    <p class="section-lede" id="story-lede"></p>
+    <div class="story-image" id="story-image"></div>
+    <div class="story-body" id="story-body"></div>
   </section>
 
   <section class="section" id="publications">
@@ -45,10 +65,16 @@
     <ol class="pub-list" id="pub-list"></ol>
   </section>
 
+  <section class="section" id="talks">
+    <h2 class="section-title"><span class="en">Talks &amp; Media</span><span class="ja">講演・メディア</span></h2>
+    <p class="section-lede" id="talks-lede"></p>
+    <div class="talks-list" id="talks-list"></div>
+  </section>
+
   <section class="section" id="news">
     <h2 class="section-title"><span class="en">News</span><span class="ja">近況・随想</span></h2>
     <p class="section-lede">noteに綴っている文章の新しいものから。</p>
-    <div class="news-grid" id="news-grid"><p class="muted">読み込んでいます……</p></div>
+    <div id="news-body"><p class="muted">読み込んでいます……</p></div>
     <p class="news-more"><a id="note-link" href="#" target="_blank" rel="noopener">すべての記事を note で読む →</a></p>
   </section>
 
@@ -65,7 +91,6 @@
 <script src="js/main.js"></script>
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
-/* 管理者招待メールのリンクから来た場合、ログイン後に管理画面へ移動します */
 if (window.netlifyIdentity) {
   netlifyIdentity.on("init", u => { if (!u) netlifyIdentity.on("login", () => { document.location.href = "/admin/"; }); });
 }

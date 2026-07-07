@@ -16,9 +16,39 @@ collections:
         fields:
           - { name: "name_ja", label: "氏名（日本語）", widget: "string" }
           - { name: "name_en", label: "氏名（英語）", widget: "string" }
+          - { name: "photo", label: "顔写真（ここにアップロード）", widget: "image", required: false }
           - { name: "tagline", label: "肩書き・ひとこと（トップに表示）", widget: "string", required: false }
           - { name: "affiliations", label: "所属（1行ずつ追加）", widget: "list", field: { name: "item", label: "所属", widget: "string" } }
           - { name: "bio", label: "経歴・自己紹介（空行で段落を分けます）", widget: "text" }
+          - name: "links"
+            label: "外部リンク（researchmap・Xなど）"
+            widget: "list"
+            required: false
+            fields:
+              - { name: "label", label: "名前（researchmap または X と入れるとアイコンが付きます）", widget: "string" }
+              - { name: "url", label: "URL", widget: "string" }
+
+      - name: "talks"
+        label: "講演・メディア（Talks & Media）"
+        file: "data/talks.json"
+        fields:
+          - { name: "lede", label: "冒頭の紹介文（任意）", widget: "string", required: false }
+          - name: "items"
+            label: "講演・出演（「＋」で追加。新しいものを上に）"
+            widget: "list"
+            fields:
+              - { name: "date", label: "日付（例：2025.10 や 2025年10月3日）", widget: "string", required: false }
+              - { name: "venue", label: "場（例：TEDxSaku、NHK、○○シンポジウム）", widget: "string", required: false }
+              - { name: "title", label: "講演タイトル・内容", widget: "string" }
+              - { name: "url", label: "リンク（動画や記事があれば）", widget: "string", required: false }
+
+      - name: "story"
+        label: "原点（Story）"
+        file: "data/story.json"
+        fields:
+          - { name: "lede", label: "冒頭の一文（任意）", widget: "string", required: false }
+          - { name: "image", label: "写真（任意・村の風景など）", widget: "image", required: false }
+          - { name: "body", label: "本文（空行で段落を分けます）", widget: "text" }
 
       - name: "publications"
         label: "論文リスト"
@@ -33,7 +63,7 @@ collections:
               - { name: "venue", label: "掲載誌・媒体", widget: "string", required: false }
               - { name: "year", label: "年（例：2026年刊行予定）", widget: "string", required: false }
               - { name: "pdf", label: "PDFファイル（ここにアップロード）", widget: "file", required: false }
-              - { name: "link", label: "外部リンク（あれば）", widget: "string", required: false }
+              - { name: "cinii", label: "CiNiiのURL（論文ページのリンク）", widget: "string", required: false }
 
       - name: "settings"
         label: "サイト設定（note・連絡フォーム）"
@@ -41,6 +71,12 @@ collections:
         fields:
           - { name: "note_url", label: "noteのURL", widget: "string" }
           - { name: "news_count", label: "noteの記事を表示する件数", widget: "number", default: 6 }
+          - name: "news_style"
+            label: "Newsの見せ方"
+            widget: "select"
+            options:
+              - { label: "サムネイル付きカード", value: "card" }
+              - { label: "タイトルのみの行", value: "row" }
           - name: "news_manual"
             label: "記事の手動リスト（noteの自動取得が止まった時だけ使われます。普段は空でOK）"
             widget: "list"

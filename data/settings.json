@@ -1,9 +1,10 @@
 {
   "note_url": "https://note.com/yusuketanaka1215",
   "news_count": 6,
+  "news_style": "card",
   "news_manual": [],
   "contact_mode": "button",
-  "gform_url": "https://docs.google.com/forms/d/e/1FAIpQLSeBShL19zpWFzqhrR3qPDt690CBdt2cyWYobR-EggB5-MSuBw/viewform?usp=publish-editor",
+  "gform_url": "",
   "contact_text": "講演・取材・研究に関するご相談など、下記よりご連絡ください。",
   "footer_text": "© Yusuke Tanaka"
 }
