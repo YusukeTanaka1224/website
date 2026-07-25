@@ -103,6 +103,8 @@ main{max-width:var(--measure);margin:0 auto;padding:0 1.4rem}
 .story-body p{margin-bottom:1.8em;text-align:justify;font-family:var(--display);line-height:2.15}
 .story-image{margin:0 0 2.8rem}
 .story-image img{width:100%;max-height:22rem;object-fit:cover;filter:grayscale(.2) brightness(.94);border:1px solid var(--line)}
+.story-inline{margin:3rem 0}
+.story-inline img{width:100%;max-height:24rem;object-fit:cover;filter:grayscale(.2) brightness(.94);border:1px solid var(--line)}
 
 /* ---- Publications ---- */
 .pub-list{list-style:none;counter-reset:pub}

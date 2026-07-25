@@ -13,7 +13,7 @@ load("data/profile.json").then(p => {
   if (p.photo){ $("profile-photo-wrap").innerHTML = `<img class="profile-photo" src="${esc(p.photo)}" alt="${esc(p.name_ja)}">`; document.querySelector(".profile-grid").classList.add("has-photo"); }
   else $("profile-photo-wrap").remove();
   $("profile-affil").innerHTML = (p.affiliations || []).map(a => esc(a)).join("<br>");
-  $("profile-bio").innerHTML = (p.bio || "").split(/\n\s*\n/).map(par => `<p>${esc(par.trim())}</p>`).join("");
+  $("profile-bio").innerHTML = (p.bio || "").split(/\n+/).map(t => t.trim()).filter(Boolean).map(par => `<p>${esc(par)}</p>`).join("");
   /* 外部リンク（researchmap・X など）を小さなアイコン付きで表示 */
   const icons = {
     "researchmap": `<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M7 15c1.5-4 3-6 5-6s3.5 2 5 6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
@@ -29,9 +29,15 @@ load("data/profile.json").then(p => {
 load("data/story.json").then(s => {
   $("story-lede").textContent = s.lede || "";
   if (!s.lede) $("story-lede").remove();
-  if (s.image) $("story-image").innerHTML = `<img src="${esc(s.image)}" alt="">`;
+  const paras = (s.body || "").split(/\n+/).map(t => t.trim()).filter(Boolean);
+  const hasMarker = paras.includes("【写真】");
+  const figure = s.image ? `<figure class="story-inline"><img src="${esc(s.image)}" alt=""></figure>` : "";
+  /* 本文中に【写真】と書かれていればその位置に、なければ冒頭に写真を表示 */
+  if (s.image && !hasMarker) $("story-image").innerHTML = `<img src="${esc(s.image)}" alt="">`;
   else $("story-image").remove();
-  $("story-body").innerHTML = (s.body || "").split(/\n\s*\n/).map(par => `<p>${esc(par.trim())}</p>`).join("");
+  $("story-body").innerHTML = paras.map(par =>
+    par === "【写真】" ? figure : `<p>${esc(par)}</p>`
+  ).join("");
 }).catch(()=>{});
 
 /* ---- Talks & Media（講演・メディア） ---- */
