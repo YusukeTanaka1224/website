@@ -19,6 +19,13 @@ collections:
           - { name: "photo", label: "顔写真（ここにアップロード）", widget: "image", required: false }
           - { name: "tagline", label: "肩書き・ひとこと（トップに表示）", widget: "string", required: false }
           - { name: "affiliations", label: "所属（1行ずつ追加）", widget: "list", field: { name: "item", label: "所属", widget: "string" } }
+          - name: "affiliation_links"
+            label: "所属のリンク（空のままならムラツムギ・PMIに自動でリンクされます）"
+            widget: "list"
+            required: false
+            fields:
+              - { name: "match", label: "所属名に含まれる文字（例：ムラツムギ）", widget: "string" }
+              - { name: "url", label: "リンク先URL", widget: "string" }
           - { name: "bio", label: "経歴・自己紹介（空行で段落を分けます）", widget: "text" }
           - name: "links"
             label: "外部リンク（researchmap・Xなど）"
@@ -47,8 +54,8 @@ collections:
         file: "data/story.json"
         fields:
           - { name: "lede", label: "冒頭の一文（任意）", widget: "string", required: false }
-          - { name: "image", label: "写真（本文中の【写真】と書いた位置に表示されます）", widget: "image", required: false }
-          - { name: "body", label: "本文（改行で段落を分けます。写真を入れたい位置に【写真】と一行書いてください）", widget: "text" }
+          - { name: "image", label: "写真（任意・村の風景など）", widget: "image", required: false }
+          - { name: "body", label: "本文（空行で段落を分けます）", widget: "text" }
 
       - name: "publications"
         label: "論文リスト"
